@@ -27,6 +27,14 @@ tar -zxvf /usr/local/src/home-iniac.tgz
 sed -i "s|/home/pi|$ZHOME|g" $ZHOME"/iniac/config.xml"
 sed -i "s|/home/pi|$ZHOME|g" $ZHOME"/iniac/iniac_base.py"
 sed -i "s|/home/pi|$ZHOME|g" $ZHOME"/iniac/iniac_parse_cmd.py"
+## SOME UDEV RULES
+cat <<EOF > /etc/udev/rules.d/99-libftdi.rules
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6015", GROUP="dialout", MODE="0660"
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", GROUP="dialout", MODE="0660"
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", GROUP="dialout", MODE="0660"
+EOF
+## RELOAD UDEV
+udevadm control --reload-rules
 
 # INSTALLATION WWW
 mkdir -p /var/www/iniac/iniac/
