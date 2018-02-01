@@ -1,9 +1,11 @@
 #!/bin/bash
 
+if [ ! -d /boot/CF ]; then exit 1; fi
+
 # So you think you can fuzz :)
-CFUSER=`cat /boot/CFUSER.txt`
-CFPASS=`cat /boot/CFPASS.txt`
-CFHOST=`cat /boot/CFHOST.txt`
+CFUSER=`cat /boot/CF/USER.txt`
+CFPASS=`cat /boot/CF/PASS.txt`
+CFHOST=`cat /boot/CF/HOST.txt`
 
 cd /usr/local/src
 
